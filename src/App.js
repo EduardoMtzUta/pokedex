@@ -44,6 +44,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <div className="flex-container">
+          <a className="alignCentral" href="https://github.com/EduardoMtzUta/pokedex">Github</a>
           <img
             src={
               pokemon?.sprites?.front_default ??
