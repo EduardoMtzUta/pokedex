@@ -2,7 +2,6 @@ import Modal from "./Modal";
 import "./App.css";
 import { useEffect, useState } from "react";
 
-
 function App() {
   const [pokemon, setPokemon] = useState({});
 
@@ -19,7 +18,6 @@ function App() {
   };
 
   const getRandomInt = (min = 1, max = 600) => {
-    
     return Math.floor(Math.random() * (max - min) + min);
   };
 
@@ -41,7 +39,6 @@ function App() {
   useEffect(() => {
     console.log({ pokemon });
   }, [pokemon]);
-
 
   return (
     <div className="App">
@@ -66,35 +63,56 @@ function App() {
         </div>
         <p>Id: {pokemon.id ?? "No pokemon selected"}</p>
         <p>Name: {pokemon.name ?? "No pokemon selected"}</p>
-        {pokemon.id ? <><button
-          className="hiddenAbilities buttonAbilities"
-          onClick={(showAbilities, toggle)}
-        >
-          Abilities
-        </button><br /><br /></> : <p></p>}
+        {pokemon.id ? (
+          <>
+            <button
+              className="hiddenAbilities buttonAbilities"
+              onClick={(showAbilities, toggle)}
+            >
+              Abilities
+            </button>
+            <br />
+            <br />
+          </>
+        ) : (
+          <p></p>
+        )}
         <div id="abilities">
           <Modal active={active} toggle={toggle}>
-            <h3 className="TextAbilitiesTitle">Abilities of {pokemon.name}</h3>
+            <h3 className="TextAbilitiesTitle">{pokemon.name}</h3>
             <br />
-            {JSON.stringify(pokemon.abilities)}
+            <img
+              src={
+                pokemon?.sprites?.front_default ??
+                "https://1000marcas.net/wp-content/uploads/2020/01/Logo-Pokemon.png"
+              }
+              className="poke-image"
+              alt="logo"
+            />
+            <p className="TextAbilitiesTitle">
+              Abilities
+            </p>
+            <div className="alignCentral">
+              {pokemon?.abilities?.map((ability) =>( <li>{ability.ability.name}</li>))}
+            </div> 
           </Modal>
         </div>
         <div className="flex-container">
-          
-          {pokemon.id ? <><button
-            className="button"
-            onClick={() => fetchPokemon(getBack())}
-          >
-            Back
-          </button> </> : 
-          <button
-          className="button"
-          onClick={() => fetchPokemon(600)}
-        >
-          Back
-        </button> 
-          }
-          
+          {pokemon.id ? (
+            <>
+              <button
+                className="button"
+                onClick={() => fetchPokemon(getBack())}
+              >
+                Back
+              </button>{" "}
+            </>
+          ) : (
+            <button className="button" onClick={() => fetchPokemon(600)}>
+              Back
+            </button>
+          )}
+
           <button
             className="button"
             onClick={() => fetchPokemon(getRandomInt())}
@@ -102,17 +120,20 @@ function App() {
             Random
           </button>
 
-          {pokemon.id ? <><button
-            className="button"
-            onClick={() => fetchPokemon(getNext())}
-          >
-            Next
-          </button> </> : <button
-            className="button"
-            onClick={() => fetchPokemon(1)}
-          >
-            Next
-          </button>}
+          {pokemon.id ? (
+            <>
+              <button
+                className="button"
+                onClick={() => fetchPokemon(getNext())}
+              >
+                Next
+              </button>{" "}
+            </>
+          ) : (
+            <button className="button" onClick={() => fetchPokemon(1)}>
+              Next
+            </button>
+          )}
         </div>
       </header>
     </div>
