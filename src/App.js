@@ -8,8 +8,6 @@ function App() {
 
   const [active, setActive] = useState(false);
 
-  const [counter, setCounter] = useState(1);
-
   const toggle = () => {
     setActive(!active);
   };
@@ -21,6 +19,7 @@ function App() {
   };
 
   const getRandomInt = (min = 1, max = 600) => {
+    
     return Math.floor(Math.random() * (max - min) + min);
   };
 
@@ -67,12 +66,12 @@ function App() {
         </div>
         <p>Id: {pokemon.id ?? "No pokemon selected"}</p>
         <p>Name: {pokemon.name ?? "No pokemon selected"}</p>
-        <button
+        {pokemon.id ? <><button
           className="hiddenAbilities btn btn-outline-primary"
           onClick={(showAbilities, toggle)}
         >
           Abilities
-        </button><br/><br/>
+        </button><br /><br /></> : <p></p>}
         <div id="abilities">
           <Modal active={active} toggle={toggle}>
             <h3 className="TextAbilitiesTitle">Abilities of {pokemon.name}</h3>
@@ -81,24 +80,39 @@ function App() {
           </Modal>
         </div>
         <div className="flex-container">
-          <button
+          
+          {pokemon.id ? <><button
             className="button"
-            onClick={() => fetchPokemon(getBack()) ?? fetchPokemon(600)}
+            onClick={() => fetchPokemon(getBack())}
           >
             Back
-          </button>
+          </button> </> : 
+          <button
+          className="button"
+          onClick={() => fetchPokemon(600)}
+        >
+          Back
+        </button> 
+          }
+          
           <button
             className="button"
             onClick={() => fetchPokemon(getRandomInt())}
           >
             Random
           </button>
-          <button
+
+          {pokemon.id ? <><button
             className="button"
-            onClick={() => fetchPokemon(getNext()) ?? fetchPokemon(1)}
+            onClick={() => fetchPokemon(getNext())}
           >
             Next
-          </button>
+          </button> </> : <button
+            className="button"
+            onClick={() => fetchPokemon(1)}
+          >
+            Next
+          </button>}
         </div>
       </header>
     </div>
