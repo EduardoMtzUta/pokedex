@@ -23,12 +23,13 @@ function App() {
     return Math.floor(Math.random() * (max - min) + min);
   };
 
-  const getNext = (id) => {
-    return (id = pokemon.id + 1);
+  const getNext = () => {
+
+    return pokemon.id + 1;
   };
 
-  const getBack = (id) => {
-    return (id = pokemon.id - 1);
+  const getBack = () => {
+    return pokemon.id - 1;
   };
 
   const showAbilities = () => {
