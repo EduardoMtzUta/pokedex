@@ -1,7 +1,7 @@
 import Modal from "./Modal";
 import "./App.css";
 import { useEffect, useState } from "react";
-import 'bootstrap/dist/css/bootstrap.min.css'; 
+
 
 function App() {
   const [pokemon, setPokemon] = useState({});
@@ -24,7 +24,6 @@ function App() {
   };
 
   const getNext = () => {
-
     return pokemon.id + 1;
   };
 
@@ -68,7 +67,7 @@ function App() {
         <p>Id: {pokemon.id ?? "No pokemon selected"}</p>
         <p>Name: {pokemon.name ?? "No pokemon selected"}</p>
         {pokemon.id ? <><button
-          className="hiddenAbilities btn btn-outline-primary"
+          className="hiddenAbilities buttonAbilities"
           onClick={(showAbilities, toggle)}
         >
           Abilities
